@@ -2,17 +2,665 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tuusuario.github.io/tu-repositorio/">
     <meta property="og:title" content="Abadía de NamHae: Archivum — Prof. Jang">
-    <meta property="og:description" content="ID: #00-746 // CLÉRIGO. Acceso autorizado al expediente parroquial...">
-    <meta property="og:image" content="https://i.imgur.com/aV7eOhh.jpeg">
+    <meta property="og:description" content="ID: #00-746 // CLÉRIGO. Acceso autorizado al expediente parroquial, registros de fe y archivos confidenciales.">
+    
+    <meta property="og:image" content="https://tuusuario.github.io/tu-repositorio/previa.jpg">
+    <meta property="og:image:width" content="600">
+    <meta property="og:image:height" content="600">
     <meta property="og:site_name" content="NAMHAE.ABBEY">
+    
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="facebookexternalhit" content="index, follow">
+    <meta name="Facebot" content="index, follow">
+    
+    <title>ABOUT</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Playfair+Display:ital,wght=0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --negro-absoluto: #050000;
+            --negro-expediente: #0f0b0b;
+            --rojo-heráldico: #990000;
+            --rojo-neon: #ff2a2a;
+            --ceniza: #a0a0aa;
+            --blanco-pergamino: #e4e4e7;
+            --borde-dossier: 1px solid rgba(153, 0, 0, 0.35);
+        }
 
-    <meta http-serif="refresh" content="0; url=https://seojjang.neocities.org/Janghome">
-    <script>window.location.href = "https://seojjang.neocities.org/Janghome";</script>
-    <title>Cargando Archivum...</title>
+        body {
+            background-color: var(--negro-absoluto);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: radial-gradient(rgba(153, 0, 0, 0.08) 1px, transparent 0);
+            background-size: 30px 30px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* --- TABLILLA PRINCIPAL --- */
+        .dossier-container {
+            width: 760px;
+            height: 325px; 
+            background-color: var(--negro-expediente);
+            border: 1px solid var(--rojo-heráldico);
+            border-radius: 4px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* BARRA SUPERIOR */
+        .dossier-topbar {
+            background: linear-gradient(180deg, #1a0000 0%, var(--negro-expediente) 100%);
+            padding: 10px 20px;
+            border-bottom: 1px solid var(--rojo-heráldico);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 20px;
+        }
+
+        .system-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.70rem;
+            color: var(--ceniza);
+            letter-spacing: 1.5px;
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            background-color: var(--rojo-neon);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--rojo-neon);
+            animation: pulse 2s infinite;
+        }
+
+        .network-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.80rem;
+            font-weight: 800;
+            color: var(--blanco-pergamino);
+            letter-spacing: 3px;
+        }
+
+        /* --- CUERPO INTERNO --- */
+        .dossier-grid {
+            display: flex;
+            flex: 1;
+            height: calc(100% - 41px);
+            overflow: hidden;
+        }
+
+        /* PANEL LATERAL DE PERFIL */
+        .profile-card {
+            width: 240px;
+            background-color: rgba(5, 0, 0, 0.4);
+            border-right: var(--borde-dossier);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px 10px 8px 10px;
+            box-sizing: border-box;
+            text-align: center;
+            justify-content: space-between;
+        }
+
+        .profile-identity-set {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .avatar-container {
+            position: relative;
+            width: 85px;
+            height: 85px;
+            margin: 0 auto 6px auto;
+        }
+
+        .avatar-circular {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--rojo-heráldico);
+            filter: grayscale(1) contrast(1.2) brightness(0.9);
+            box-shadow: 0 0 15px rgba(153, 0, 0, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        .avatar-container:hover .avatar-circular {
+            filter: grayscale(0.2) contrast(1.1);
+            border-color: var(--rojo-neon);
+        }
+
+        .goth-status-icon {
+            position: absolute;
+            bottom: 0px;
+            right: 2px;
+            background: var(--negro-absoluto);
+            color: var(--rojo-neon);
+            border: 1px solid var(--rojo-heráldico);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 11px;
+            line-height: 18px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .profile-identity h2 {
+            margin: 0;
+            font-family: 'Cinzel', serif;
+            font-size: 1.00rem;
+            color: var(--blanco-pergamino);
+            letter-spacing: 1px;
+            line-height: 1.2;
+        }
+
+        .profile-identity span {
+            font-family: 'Cinzel', serif;
+            font-size: 0.60rem;
+            color: var(--rojo-heráldico);
+            letter-spacing: 2px;
+            font-weight: 600;
+            display: block;
+            margin-top: 2px;
+        }
+
+        .action-row {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin: 8px 0 4px 0;
+        }
+
+        /* ESTILO UNIFICADO PARA BOTONES Y ENLACES DE ACCIÓN */
+        .btn-action {
+            position: relative;
+            width: 28px;
+            height: 28px;
+            background: rgba(153, 0, 0, 0.08);
+            border: 1px solid var(--rojo-heráldico);
+            color: var(--ceniza);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-sizing: border-box;
+        }
+
+        .btn-action:hover {
+            color: #ffffff;
+            background: var(--rojo-heráldico);
+            border-color: var(--rojo-neon);
+        }
+
+        .btn-action::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(5px);
+            background: var(--negro-absoluto);
+            color: var(--blanco-pergamino);
+            font-family: 'Cinzel', serif;
+            font-size: 0.55rem;
+            letter-spacing: 1px;
+            padding: 4px 8px;
+            border: 1px solid var(--rojo-heráldico);
+            border-radius: 2px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.2s ease;
+            z-index: 100;
+        }
+
+        .btn-action:hover::after {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .social-counters {
+            width: 100%;
+            border-top: 1px double rgba(153, 0, 0, 0.3);
+            padding-top: 6px;
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 6px;
+        }
+
+        .stat-box h4 {
+            margin: 0;
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            color: var(--blanco-pergamino);
+        }
+
+        .stat-box span {
+            font-size: 0.55rem;
+            color: var(--ceniza);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+        }
+
+        /* --- REPRODUCTOR LATERAL IZQUIERDO --- */
+        .audio-anchor-left {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            border-top: 1px solid rgba(153, 0, 0, 0.3);
+            padding: 6px 0 2px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            box-sizing: border-box;
+        }
+
+        .audio-flex-row {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 4px;
+            box-sizing: border-box;
+            gap: 6px;
+        }
+
+        .audio-anchor-left audio {
+            height: 16px;
+            width: 105px; 
+            filter: invert(1) sepia(1) hue-rotate(-50deg) saturate(5);
+        }
+
+        .marquee-container {
+            flex: 1;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            background: #000;
+            height: 14px;
+            line-height: 14px;
+            border: 1px solid rgba(153, 0, 0, 0.2);
+            border-radius: 2px;
+        }
+
+        .marquee-text {
+            display: inline-block;
+            font-family: 'Cinzel', serif;
+            font-size: 0.52rem;
+            color: var(--rojo-heráldico);
+            letter-spacing: 1px;
+            font-weight: bold;
+            padding-left: 100%;
+            animation: gothicMarquee 10s linear infinite;
+        }
+
+        /* --- PANEL LATERAL DERECHO CON SCROLL UNIFICADO --- */
+        .lado-derecho-dossier {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .lado-derecho-dossier::-webkit-scrollbar { width: 4px; }
+        .lado-derecho-dossier::-webkit-scrollbar-track { background: transparent; }
+        .lado-derecho-dossier::-webkit-scrollbar-thumb { background: var(--rojo-heráldico); }
+
+        #toggle-bio { display: none; }
+        
+        .trigger-bio {
+            background: linear-gradient(90deg, rgba(153,0,0,0.15) 0%, transparent 100%);
+            border-bottom: 1px solid rgba(153, 0, 0, 0.3);
+            padding: 10px 20px;
+            color: var(--blanco-pergamino);
+            font-family: 'Cinzel', serif;
+            font-size: 0.72rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            flex-shrink: 0;
+            position: sticky;
+            top: 0;
+            background-color: var(--negro-expediente);
+            z-index: 2;
+        }
+        .trigger-bio:hover {
+            background: rgba(153, 0, 0, 0.25);
+            color: var(--rojo-neon);
+        }
+        .trigger-bio::after {
+            content: '▼';
+            font-size: 0.6rem;
+            color: var(--rojo-heráldico);
+            transition: transform 0.3s;
+        }
+
+        /* BIOGRAFÍA INTEGRADA EN EL FLUJO */
+        .content-bio {
+            max-height: 0;
+            overflow: hidden;
+            background: rgba(5, 0, 0, 0.2);
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s;
+            padding: 0 20px;
+            box-sizing: border-box;
+            flex-shrink: 0;
+        }
+        
+        .content-bio p {
+            margin: 12px 0;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: var(--blanco-pergamino);
+            text-align: justify;
+        }
+
+        #toggle-bio:checked ~ .content-bio {
+            max-height: 2000px;
+            padding: 4px 20px 15px 20px;
+            border-bottom: 1px solid rgba(153, 0, 0, 0.25);
+        }
+        #toggle-bio:checked ~ .trigger-bio::after {
+            transform: rotate(180deg);
+            color: var(--rojo-neon);
+        }
+
+        /* --- SUB-PLEGABLE CONFIDENCIAL --- */
+        .confidential-wrapper {
+            margin-top: 15px;
+            margin-bottom: 5px;
+            border: 1px dashed rgba(255, 42, 42, 0.3);
+            background: rgba(15, 11, 11, 0.6);
+            border-radius: 3px;
+        }
+
+        #toggle-confidential { display: none; }
+
+        .trigger-confidential {
+            background: linear-gradient(90deg, rgba(153, 0, 0, 0.2) 0%, transparent 100%);
+            padding: 8px 12px;
+            color: var(--rojo-neon);
+            font-family: 'Cinzel', serif;
+            font-size: 0.68rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            transition: all 0.3s ease;
+        }
+
+        .trigger-confidential:hover {
+            background: rgba(255, 42, 42, 0.15);
+            text-shadow: 0 0 8px var(--rojo-neon);
+        }
+
+        .trigger-confidential::after {
+            content: '🔐';
+            font-size: 0.7rem;
+            transition: transform 0.3s;
+        }
+
+        .content-confidential {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 0 15px;
+            box-sizing: border-box;
+        }
+
+        .content-confidential p {
+            font-size: 0.80rem !important;
+            line-height: 1.4;
+            color: #d1d1d6;
+            border-left: 2px solid var(--rojo-heráldico);
+            padding-left: 10px;
+            margin: 12px 0;
+            text-align: justify;
+        }
+
+        .content-confidential p b {
+            color: var(--rojo-neon);
+            font-family: 'Cinzel', serif;
+        }
+
+        #toggle-confidential:checked ~ .content-confidential {
+            max-height: 1000px; 
+            padding: 5px 15px 12px 15px;
+        }
+
+        #toggle-confidential:checked ~ .trigger-confidential::after {
+            content: '🔓';
+            transform: rotate(360deg);
+        }
+
+        #toggle-confidential:checked ~ .trigger-confidential {
+            border-bottom: 1px solid rgba(255, 42, 42, 0.2);
+            background: rgba(15, 0, 0, 0.4);
+        }
+
+        /* FEED PARROQUIAL */
+        .feed-dossier {
+            padding: 15px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .feed-item {
+            background: rgba(15, 11, 11, 0.7);
+            border: 1px solid rgba(153, 0, 0, 0.15);
+            padding: 10px 12px;
+            border-radius: 3px;
+            flex-shrink: 0;
+        }
+
+        .feed-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+            border-bottom: 1px solid rgba(153, 0, 0, 0.1);
+            padding-bottom: 2px;
+        }
+
+        .feed-tag {
+            font-family: 'Cinzel', serif;
+            font-size: 0.62rem;
+            color: var(--rojo-neon);
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .feed-time {
+            font-size: 0.65rem;
+            color: var(--ceniza);
+            font-style: italic;
+        }
+
+        .feed-item p {
+            margin: 0;
+            font-size: 0.82rem;
+            line-height: 1.4;
+            color: var(--blanco-pergamino);
+            text-align: justify;
+        }
+
+        /* MARCA DE AGUA */
+        .goth-watermark {
+            position: absolute;
+            bottom: -15px;
+            right: -10px;
+            font-size: 8rem;
+            color: rgba(153, 0, 0, 0.02);
+            pointer-events: none;
+            user-select: none;
+        }
+
+        /* ANIMACIONES */
+        @keyframes gothicMarquee {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-100%, 0, 0); }
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.4; }
+            50% { opacity: 1; }
+            100% { opacity: 0.4; }
+        }
+    </style>
 </head>
 <body>
-    <p>Redirigiendo a la Abadía de NamHae...</p>
+
+    <div class="dossier-container">
+        <div class="goth-watermark">☩</div>
+
+        <div class="dossier-topbar">
+            <div class="system-status">
+                <div class="status-dot"></div>
+                <span>En línea</span>
+            </div>
+            <div class="network-title">NAMHAE.ABBEY</div>
+        </div>
+
+        <div class="dossier-grid">
+            
+            <div class="profile-card">
+                <div class="profile-identity-set">
+                    <div class="avatar-container">
+                        <img src="https://i.imgur.com/zUGmPho.jpeg" alt="Fotografía del Sujeto" class="avatar-circular">
+                        <div class="goth-status-icon">✙</div>
+                    </div>
+
+                    <div class="profile-identity">
+                        <h2>Prof. Jang</h2>
+                        <span>ID: #00-746 // CLÉRIGO</span>
+                    </div>
+                </div>
+
+                <div class="action-row">
+                    <a href="https://whispa.sh/@sinfultongue" target="_blank" class="btn-action" data-tooltip="ENVIAR CONFESIÓN">✉</a>
+                    <button class="btn-action" data-tooltip="LOCALIZAR CAPILLA">☩</button>
+                    <button class="btn-action" data-tooltip="MENSAJE PRIVADO">🜏</button>
+                    <button class="btn-action" data-tooltip="REPORTAR USUARIO">🕀</button>
+                </div>
+
+                <div class="social-counters">
+                    <div class="stat-box">
+                        <h4>12.2k</h4>
+                        <span>Fieles</span>
+                    </div>
+                    <div class="stat-box">
+                        <h4>34k</h4>
+                        <span>Votos</span>
+                    </div>
+                    <div class="stat-box">
+                        <h4>A+</h4>
+                        <span>Rango</span>
+                    </div>
+                </div>
+
+                <div class="audio-anchor-left">
+                    <div class="audio-flex-row">
+                        <audio controls src="https://dl.dropbox.com/scl/fi/bc27ej8tz9gjkjofc4ks4/Vivaldi_-Gloria-RV-589_-III.-Laudamus-te.mp3?rlkey=ttgkeshpa0ph8a6ddnnq2u0li&st=xoq528yl&raw=1"></audio>
+                        <div class="marquee-container">
+                            <div class="marquee-text">VIVALDI - GLORIA RV 589: III. LAUDAMUS TE ✦</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lado-derecho-dossier">
+                
+                <input type="checkbox" id="toggle-bio">
+                
+                <label for="toggle-bio" class="trigger-bio">
+                    ✙ VER BIOGRAFÍA
+                </label>
+                
+                <div class="content-bio">
+                    <p>Fue enviado como reemplazo del cura anterior, y desde entonces, reside formalmente en el ala norte de la Abadía de NamHae. Desde ahí, se encarga de congregar, guiar y escuchar las confessions de los feligreses que acuden a sus puertas.</p>
+                    <p>No solo se desempeña como sacerdote, también funge como profesor titular de Teología en la universidad de Seúl. </p>
+                    
+                    <div class="confidential-wrapper">
+                        <input type="checkbox" id="toggle-confidential">
+                        
+                        <label for="toggle-confidential" class="trigger-confidential">
+                            <span>🕀 ARCHIVO: CONFIDENCIAL</span>
+                        </label>
+                        
+                        <div class="content-confidential">
+                            <p><b>01.</b> Aunque predica el perdón, cree firmemente en las consecuencias. Toda infracción merece un castigo.</p>
+                            <p><b>02.</b> No es de piedra. Como el resto, también tiene... necesidades. Las que suele apagar con 50 Ave Marías, 1 Gloria, 1 Padre Nuestro y los 5 Misterios. El rosario siempre lo lleva en un bolsillo.</p>
+                            <p><b>03.</b> El sigilo sacramental no impide que recuerde, por ende, no puede evitar relacionar rostros con los pecados que escuchó en la capilla de confesiones.</p>
+                            <p><b>04.</b> Sube "thirst traps" a sus cuentas de Instagram y TikTok, siempre tras máscaras y cascos. El dinero conseguido a raíz de dicha monetización, va al fondo comunitario que ayuda a los feligreses más vulnerables.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feed-dossier">
+                    
+                    <div class="feed-item">
+                        <div class="feed-item-header">
+                            <span class="feed-tag">CONVOCATORIA DE EMPLEO</span>
+                            <span class="feed-time">Hace 5m</span>
+                        </div>
+                        <p>Se solicita ayudante de historiador para la restauración de documentos y libros sagrados. Requisito indispensable: experiencia y discreción absoluta.</p>
+                    </div>
+
+                    <div class="feed-item">
+                        <div class="feed-item-header">
+                            <span class="feed-tag">LITURGIA DE LA VIGILIA</span>
+                            <span class="feed-time">Hace 13h</span>
+                        </div>
+                        <p>Se anuncia la próxima misa de vigilia y exégesis doctrinal presidida por el Padre Jang. El portón del presbiterio se abrirá para todos los feligreses que lleguen. Incluye refrigerio.</p>
+                    </div>
+
+                    <div class="feed-item">
+                        <div class="feed-item-header">
+                            <span class="feed-tag">SACRAMENTO Y CONFESIONES</span>
+                            <span class="feed-time">14 de mayo</span>
+                        </div>
+                        <p>Recuerden llegar temprano, estamos abiertos de seis a seis, exceptuando la hora de la misa. Toda declaración espiritual se mantendrá bajo el juramento de silencio del sacerdote confesor.</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 </body>
 </html>
