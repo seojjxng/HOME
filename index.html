@@ -47,6 +47,7 @@
             background-image: radial-gradient(rgba(153, 0, 0, 0.08) 1px, transparent 0);
             background-size: 30px 30px;
             font-family: 'Playfair Display', serif;
+            box-sizing: border-box;
         }
 
         /* --- TABLILLA PRINCIPAL --- */
@@ -71,7 +72,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 20px;
+            height: 40px;
+            box-sizing: border-box;
         }
 
         .system-status {
@@ -105,7 +107,7 @@
         .dossier-grid {
             display: flex;
             flex: 1;
-            height: calc(100% - 41px);
+            height: calc(100% - 40px);
             overflow: hidden;
         }
 
@@ -121,6 +123,7 @@
             box-sizing: border-box;
             text-align: center;
             justify-content: space-between;
+            flex-shrink: 0;
         }
 
         .profile-identity-set {
@@ -196,7 +199,7 @@
             margin: 8px 0 4px 0;
         }
 
-        /* ESTILO UNIFICADO PARA BOTONES Y ENLACES DE ACCIÓN */
+        /* ENLACES DE ACCIÓN */
         .btn-action {
             position: relative;
             width: 28px;
@@ -528,6 +531,57 @@
             color: rgba(153, 0, 0, 0.02);
             pointer-events: none;
             user-select: none;
+        }
+
+        /* --- MEDIA QUERY PARA MODO TELÉFONO (RESPONSIVO) --- */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .dossier-container {
+                width: 100%;
+                max-width: 450px;
+                height: auto;
+                min-height: 500px;
+            }
+
+            .dossier-grid {
+                flex-direction: column;
+                height: auto;
+                overflow: visible;
+            }
+
+            .profile-card {
+                width: 100%;
+                border-right: none;
+                border-bottom: var(--borde-dossier);
+                padding: 20px 15px;
+                gap: 15px;
+            }
+
+            .social-counters {
+                padding: 10px 0;
+                margin-bottom: 0;
+            }
+
+            .audio-anchor-left {
+                padding: 10px 5px;
+            }
+
+            .audio-flex-row {
+                padding: 0;
+            }
+
+            .lado-derecho-dossier {
+                height: auto;
+                overflow: visible;
+            }
+            
+            .trigger-bio {
+                position: relative;
+                top: 0;
+            }
         }
 
         /* ANIMACIONES */
