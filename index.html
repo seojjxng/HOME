@@ -62,7 +62,6 @@
             flex-direction: column;
             overflow: hidden;
             position: relative;
-            transform-origin: center center;
         }
 
         /* BARRA SUPERIOR */
@@ -534,17 +533,54 @@
             user-select: none;
         }
 
-        /* --- REGLA RESPONSIVA PARA DISPOSITIVOS MÓVILES (MANTIENE EL RECTÁNGULO EXACTO SIN DEFORMAR) --- */
+        /* --- MEDIA QUERY PARA MODO TELÉFONO (RESPONSIVO) --- */
         @media (max-width: 768px) {
             body {
-                padding: 0;
-                overflow: hidden; /* Evita scrolls raros del body en teléfonos */
+                padding: 10px;
             }
+
             .dossier-container {
-                /* Escala el rectángulo de forma fluida basándose en el ancho de la pantalla móvil (760px base) */
-                transform: scale(calc(92vw / 760)); 
-                box-shadow: 0 10px 35px rgba(0, 0, 0, 0.9);
-                flex-shrink: 0;
+                width: 100%;
+                max-width: 450px;
+                height: auto;
+                min-height: 500px;
+            }
+
+            .dossier-grid {
+                flex-direction: column;
+                height: auto;
+                overflow: visible;
+            }
+
+            .profile-card {
+                width: 100%;
+                border-right: none;
+                border-bottom: var(--borde-dossier);
+                padding: 20px 15px;
+                gap: 15px;
+            }
+
+            .social-counters {
+                padding: 10px 0;
+                margin-bottom: 0;
+            }
+
+            .audio-anchor-left {
+                padding: 10px 5px;
+            }
+
+            .audio-flex-row {
+                padding: 0;
+            }
+
+            .lado-derecho-dossier {
+                height: auto;
+                overflow: visible;
+            }
+            
+            .trigger-bio {
+                position: relative;
+                top: 0;
             }
         }
 
@@ -680,6 +716,9 @@
 
         </div>
     </div>
+
+</body>
+</html>
 
 </body>
 </html>
